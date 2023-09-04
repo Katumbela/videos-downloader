@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import youtube_dl
+from pytube import YouTube
 
 app = Flask(__name__)
 
@@ -12,15 +12,11 @@ def download():
     url = request.form.get('url')
     if url:
         try:
-            ydl_opts = {
-                'format': 'best',
-                'outtmpl': 'downloads/%(title)s.%(ext)s',
-            }
-            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                info = ydl.extract_info(url, download=False)
-                ydl.download([url])
-                filename = f'downloads/{info["title"]}.{info["ext"]}'
-                return redirect(url_for('downloaded', filename=filename))
+            yt = YouTube(url)
+            stream = yt.streams.get_highest_resolution()
+            filename = yt.title + '.mp4'
+            stream.download(output_path='downloads', filename=filename)
+            return redirect(url_for('downloaded', filename=filename))
         except Exception as e:
             return str(e)
     return 'URL inválida.'
