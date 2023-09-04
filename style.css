@@ -1,0 +1,50 @@
+/* Ícone do hambúrguer para dispositivos móveis */
+.nav {
+    background: rgb(48, 50, 45);
+    padding: .5em 2em;
+}
+
+.nav-icon {
+    cursor: pointer;
+    font-size: 24px;
+    text-align: left;
+    color: #00a800;
+}
+
+/* Itens de navegação */
+.nav-items {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para os links de navegação */
+.nav-items a {
+    padding: 10px;
+    text-decoration: none;
+    color: #00a800;
+    margin: .2em .6em;
+}
+
+/* Estilos para telas menores (móveis) */
+@media screen and (max-width: 767px) {
+    /* Exibe o ícone do hamburguer e oculta os itens de navegação */
+    .nav-icon {
+        display: block;
+    }
+    .nav-items {
+        display: flex;
+        flex-direction: column; /* Itens de navegação na vertical */
+        align-items: center; /* Itens centralizados verticalmente */
+    }
+    .nav.expanded .nav-items {
+        display: flex; /* Exibe os itens quando expandido */
+    }
+}
+
+/* Estilos para telas maiores (desktop) */
+@media screen and (min-width: 768px) {
+    /* Oculta o ícone do hamburguer e exibe os itens de navegação horizontalmente */
+    .nav-icon {
+        display: none;
+    }
+}
