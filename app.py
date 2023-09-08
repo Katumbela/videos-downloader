@@ -20,7 +20,7 @@ def download():
         except Exception as e:
             return str(e)
     return 'URL inválida.'
-
+ 
 @app.route('/downloaded/<filename>')
 def downloaded(filename):
     return render_template('downloaded.html', filename=filename)
